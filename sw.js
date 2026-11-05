@@ -1,9 +1,10 @@
 /* Service worker : permet d'utiliser le terminal hors-ligne une fois ajouté à l'écran d'accueil.
    Réseau d'abord (pour recevoir les mises à jour), cache en secours. */
-const CACHE = "cro-terminal-v1";
+const CACHE = "cro-terminal-v2";
 const ASSETS = [
   "./",
   "index.html",
+  "cuve-cvd-44.html",
   "manifest.webmanifest",
   "icons/icon-192.png",
   "icons/icon-512.png",
