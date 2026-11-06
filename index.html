@@ -743,7 +743,7 @@ const QUIT_HINT = '(ÉCHAP ou QUITTER pour revenir au terminal)';
 async function appDocuments() {
   clear();
   await print(banner("Documents du Centre de Recherche d'Oïmiakon", 'Entrez un numéro de document pour le consulter'), { delay: 20 });
-  line(QUIT_HINT + ' · PUBLIC liste les documents publics · ACCRÉDITATION pour saisir un code d\'accès', 'dim');
+  line(QUIT_HINT + ' · PUBLIC liste les documents publics · ID pour saisir un identifiant et lister vos documents', 'dim');
   const hist = [];
   for (;;) {
     line('');
@@ -755,7 +755,7 @@ async function appDocuments() {
       await print(pub.length ? ['DOCUMENTS PUBLICS :', '', ...pub.map(f => '  ' + f.name)] : 'AUCUN DOCUMENT PUBLIC.', { delay: 20 });
       continue;
     }
-    if (['accreditation', 'accred', 'acces', 'code'].includes(norm(q))) {
+    if (['id', 'identifiant', 'user', 'acces', 'code', 'accreditation', 'accred'].includes(norm(q))) {
       const id = await askUserId();
       if (id === null) continue;
       const acc = DATA.documents.filter(f => canAccess(f, id)).sort((a, b) => isPublic(b) - isPublic(a) || a.name.localeCompare(b.name));
@@ -1447,7 +1447,7 @@ async function boot() {
 
   await print(LOGO, { delay: 90, into: col });
   await print(['', "CENTRE DE RECHERCHES D'OÏMIAKON", 'TERMINAL INTERNE — ACCÈS RESTREINT', ''], { delay: 40, into: col });
-  for (const s of ['TEST MÉMOIRE ........... 640K OK', 'LIAISON RÉSEAU C.R.O. ... OK', 'REGISTRE DES ACCRÉDITATIONS ... OK']) {
+  for (const s of ['TEST MÉMOIRE ........... 640K OK', 'LIAISON RÉSEAU C.R.O. ... OK', 'REGISTRE DES UTILISATEURS ... OK']) {
     await print(s, { delay: 0, into: col });
     await sleep(260);
   }
